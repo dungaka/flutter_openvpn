@@ -11,3 +11,7 @@
 - add user pass support
 - add connection status info
 - bug fixes
+
+## 0.3.0 - March 2021
+
+- Nullsafety support
