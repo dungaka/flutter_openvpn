@@ -229,7 +229,7 @@ packages:
     description:
       path: "."
       ref: HEAD
-      resolved-ref: "55c832b5a8d3a07c7a5545edfc9315859f1eb405"
+      resolved-ref: "17266a37c65d09f80caca5fdf9e89f040762fe9a"
       url: "https://gitlab.com/Nizwar/streaming_shared_preferences.git"
     source: git
     version: "0.0.2"
