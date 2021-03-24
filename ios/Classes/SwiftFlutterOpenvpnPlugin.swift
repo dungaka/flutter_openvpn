@@ -46,6 +46,7 @@ public class SwiftFlutterOpenvpnPlugin: NSObject, FlutterPlugin {
             result(SwiftFlutterOpenvpnPlugin.utils.currentStatus());
         }
         if call.method == "lunch" {
+            print(SwiftFlutterOpenvpnPlugin.utils.localizedDescription)
             let ovpn: String? = (call.arguments as? [String: Any])?["ovpnFileContent"] as? String
             let expireAt: String? = (call.arguments as? [String: Any])?["expireAt"] as? String
             let user: String? = (call.arguments as? [String: Any])?["user"] as? String

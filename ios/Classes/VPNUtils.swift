@@ -149,8 +149,10 @@ class VPNUtils {
                      })
                   }
             })
+          }else{
+            print(error!)
           }
-       }
+      }
     }
     
     func stopVPN() {
