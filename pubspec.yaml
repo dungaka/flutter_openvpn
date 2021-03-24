@@ -2,6 +2,7 @@ name: flutter_openvpn
 description: Flutter OpenVPN uses OpenVpn Protocol to connect with ovpn file configurations.
 version: 0.2.0
 homepage: https://gitlab.com/topfreelancerdeveloper/flutter_openvpn.git
+publish_to: 'none'
 
 environment:
   sdk: ">=2.12.0 <3.0.0"
@@ -14,7 +15,7 @@ dependencies:
   shared_preferences: ^2.0.5
   streaming_shared_preferences:
     git:
-      url: https://gitlab.com/topfreelancerdeveloper/streaming_shared_preferences.git
+      url: https://gitlab.com/Nizwar/streaming_shared_preferences.git
 
 dev_dependencies:
   flutter_test:
