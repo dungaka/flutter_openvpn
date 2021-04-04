@@ -122,7 +122,7 @@ public class FlutterOpenvpnPlugin implements FlutterPlugin, MethodCallHandler, A
           }
         });
        
-        vpn.launchVPN(config , expireAt, user, pass, country,conId,timeOut);
+        vpn.launchVPN(config, expireAt, user, pass, country, conId,timeOut);
 
 
       }else if(call.method.equals("stop")){
