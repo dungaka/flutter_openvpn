@@ -30,7 +30,6 @@ class FlutterOpenvpn {
   static OnProfileStatusChanged? _onProfileStatusChanged;
   static OnVPNStatusChanged? _onVPNStatusChanged;
   static OnConnectionStatusChanged? _onConnectionStatusChanged;
-  static String _vpnState = "";
 
   /// Initialize plugin.
   ///
@@ -85,7 +84,6 @@ class FlutterOpenvpn {
         _onProfileStatusChanged?.call(value == '0' ? false : true);
       });
       sp.addObserver(_vpnStatus, (value) {
-        _vpnState = value;
         _onVPNStatusChanged?.call(value);
       });
       sp.run();
@@ -98,7 +96,6 @@ class FlutterOpenvpn {
           _onConnectionStatusChanged?.call(values[0], values[1], values[2], value[3]);
         });
         spGroup.addObserver(_vpnStatusGroup, (value) {
-          _vpnState = value;
           _onVPNStatusChanged?.call(value);
         });
         spGroup.run();
@@ -121,11 +118,7 @@ class FlutterOpenvpn {
 
   static Future<String?> _currentCon() async => (await SharedPreferences.getInstance()).getString(_connectionId);
   static Future<String?> getVpnStatus() async {
-    try {
-      return _channel.invokeMethod<String>("getStatus");
-    } catch (err) {
-      return "";
-    }
+    return _channel.invokeMethod<String>("getStatus");
   }
 
   static Future<String?> get currentProfileId async {
@@ -162,18 +155,15 @@ class FlutterOpenvpn {
     SharedPreferences sp = await SharedPreferences.getInstance();
     await sp.setString(_connectionId, '$connectionName{||}$connectionId');
 
-    dynamic? isLunched = await _channel.invokeMethod(
-      "lunch",
-      {
-        'ovpnFileContent': ovpnFileContents,
-        'user': user,
-        'pass': pass,
-        'conName': connectionName ?? "",
-        'conId': connectionId ?? "",
-        'timeOut': Platform.isIOS ? timeOut.inSeconds.toString() : timeOut.inSeconds,
-        'expireAt': expireAt == null ? null : DateFormat("yyyy-MM-dd HH:mm:ss").format(expireAt),
-      },
-    ).catchError((error) => error);
+    dynamic? isLunched = await _channel.invokeMethod("lunch", {
+      'ovpnFileContent': ovpnFileContents,
+      'user': user,
+      'pass': pass,
+      'conName': connectionName ?? "",
+      'conId': connectionId ?? "",
+      'timeOut': Platform.isIOS ? timeOut.inSeconds.toString() : timeOut.inSeconds,
+      'expireAt': expireAt == null ? DateFormat("yyyy-MM-dd HH:mm:ss").format(DateTime.now().add(Duration(days: 3))) : DateFormat("yyyy-MM-dd HH:mm:ss").format(expireAt),
+    }).catchError((error) => error);
     if (isLunched == null) return 0;
     print((isLunched as PlatformException).message);
     return int.parse(isLunched.code);
@@ -181,10 +171,6 @@ class FlutterOpenvpn {
 
   /// stops any connected session.
   static Future<void> stopVPN() async {
-    try {
-      await _channel.invokeMethod("stop");
-    } catch (err) {
-      print(err);
-    }
+    _channel.invokeMethod("stop");
   }
 }

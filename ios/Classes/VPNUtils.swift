@@ -12,22 +12,16 @@ class VPNUtils {
     var providerManager: NETunnelProviderManager!
     var providerBundleIdentifier : String?
     var localizedDescription : String?
-    var channel : FlutterMethodChannel!
-    
-    
-
-    func loadProviderManager(completion:@escaping (_ error : Error?) -> Void)  {
-        
+    var channel : FlutterMethodChannel! 
+    func loadProviderManager(completion:@escaping (_ error : Error?) -> Void)  { 
             NETunnelProviderManager.loadAllFromPreferences { (managers, error)  in
                 if error == nil {
-                    self.providerManager = managers?.first ?? NETunnelProviderManager()
-                    
+                    self.providerManager = managers?.first ?? NETunnelProviderManager() 
                     completion(nil)
                 } else {
                     completion(error)
                 }
-            }
-        
+            } 
     }
     
     func onVpnStatusChanged(notification : NEVPNStatus) {
@@ -99,8 +93,7 @@ class VPNUtils {
             return nil
         }
     }
-    func currentStatus() -> String? {
-        
+    func currentStatus() -> String? { 
         return onVpnStatusChangedString(notification: self.providerManager.connection.status);
     }
 
@@ -130,10 +123,7 @@ class VPNUtils {
                         UserDefaults.init(suiteName: "flutter_openvpn")?.setValue("1", forKey: "profile")
                          do {
                             NotificationCenter.default.addObserver(forName: NSNotification.Name.NEVPNStatusDidChange, object: nil , queue: nil) {
-                               notification in
-
-                              
-
+                               notification in 
                                let nevpnconn = notification.object as! NEVPNConnection
                                let status = nevpnconn.status
                                self.onVpnStatusChanged(notification: status)
@@ -155,9 +145,7 @@ class VPNUtils {
       }
     }
     
-    func stopVPN() {
-        
-      self.providerManager.connection.stopVPNTunnel();
-        
+    func stopVPN() { 
+      self.providerManager?.connection.stopVPNTunnel(); 
     }
 }
