@@ -11,8 +11,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  intl: ^0.17.0
-  shared_preferences: ^2.0.5
+  intl: ^0.16.1
+  shared_preferences: ^0.5.12+4
   streaming_shared_preferences:
     git:
       url: https://github.com/dungaka/streaming_shared_preferences.git
