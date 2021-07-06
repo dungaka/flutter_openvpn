@@ -5,8 +5,8 @@ homepage: https://gitlab.com/topfreelancerdeveloper/flutter_openvpn.git
 publish_to: 'none'
 
 environment:
-  sdk: ">=1.20.1 <2.0.0"
-  flutter: ">=1.10.0"
+  sdk: ">=2.0.0 <3.0.0"
+  flutter: ">=1.20.0"
 
 dependencies:
   flutter:
